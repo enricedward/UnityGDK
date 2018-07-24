@@ -13,8 +13,10 @@ namespace Improbable.Gdk.CodeGenerator
         private readonly IFileSystem fileSystem;
 
         private readonly string schemaCompilerPath = RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
-            ? @"tools/schema_compiler/macos/schema_compiler"
-            : @"tools\schema_compiler\win\schema_compiler.exe";
+            ? @"tools/schema_compiler/macos/schema_compiler" :
+            RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
+                ? @"tools/schema_compiler/linux/schema_compiler"
+                : @"tools\schema_compiler\win\schema_compiler.exe";
 
         public static int Main(string[] args)
         {

@@ -38,6 +38,7 @@ spatial package retrieve "worker_sdk" "core-bundle-x86_64-macos"     "${PINNED_C
 spatial package retrieve "worker_sdk" "csharp"                       "${PINNED_CORE_SDK_VERSION}" "${CORE_SDK_DIR}/worker_sdk/csharp"
 spatial package retrieve "tools"      "schema_compiler-x86_64-win32" "${PINNED_CORE_SDK_VERSION}" "${CORE_SDK_DIR}/tools/schema_compiler-x86_64-win32"
 spatial package retrieve "tools"      "schema_compiler-x86_64-macos" "${PINNED_CORE_SDK_VERSION}" "${CORE_SDK_DIR}/tools/schema_compiler-x86_64-macos"
+spatial package retrieve "tools"      "schema_compiler-x86_64-linux" "${PINNED_CORE_SDK_VERSION}" "${CORE_SDK_DIR}/tools/schema_compiler-x86_64-linux"
 spatial package retrieve "schema"     "standard_library"             "${PINNED_CORE_SDK_VERSION}" "${CORE_SDK_DIR}/schema/standard_library"
 
 cleanAndUnpackTo "${CORE_SDK_DIR}/worker_sdk/core-dynamic-x86-win32"         "${NATIVE_DEPENDENCIES_PATH}/Windows/x86"
@@ -47,12 +48,15 @@ cleanAndUnpackTo "${CORE_SDK_DIR}/worker_sdk/core-bundle-x86_64-macos"       "${
 cleanAndUnpackTo "${CORE_SDK_DIR}/worker_sdk/csharp"                         "${MANAGED_DEPENDENCIES_PATH}"
 cleanAndUnpackTo "${CORE_SDK_DIR}/tools/schema_compiler-x86_64-win32"        "tools/schema_compiler/win"
 cleanAndUnpackTo "${CORE_SDK_DIR}/tools/schema_compiler-x86_64-macos"        "tools/schema_compiler/macos"
+cleanAndUnpackTo "${CORE_SDK_DIR}/tools/schema_compiler-x86_64-linux"        "tools/schema_compiler/linux"
 
 # `spatial local launch` and `spatial upload` require these to be here, until the new project structure is applied.
 cleanAndUnpackTo "${CORE_SDK_DIR}/build/schema/standard_library"             "build/dependencies/schema/standard_library"
 
 # Remove unused tools and files.
 rm tools/schema_compiler/win/protoc.exe
-rm tools/schema_compiler/macos/protoc.exe
+rm tools/schema_compiler/macos/protoc
+rm tools/schema_compiler/linux/protoc
 rm -rf tools/schema_compiler/win/proto
 rm -rf tools/schema_compiler/macos/proto
+rm -rf tools/schema_compiler/linux/proto
